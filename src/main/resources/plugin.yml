@@ -1,8 +1,8 @@
 name: Kits
-version: 1.0.7
+version: ${project.version}
 main: br.ynicollas.kits.KitsPlugin
 author: yNicollas
-website: https://github.com/adnicollas
+website: https://github.com/nicollasgtb
 api-version: '1.13'
 load: STARTUP
 commands:

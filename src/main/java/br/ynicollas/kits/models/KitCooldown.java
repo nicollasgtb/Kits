@@ -1,8 +1,5 @@
 package br.ynicollas.kits.models;
 
-import lombok.Getter;
-
-@Getter
 public class KitCooldown {
     private final int days;
     private final int hours;

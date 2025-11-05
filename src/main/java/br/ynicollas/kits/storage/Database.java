@@ -1,7 +1,6 @@
 package br.ynicollas.kits.storage;
 
 import br.ynicollas.kits.KitsPlugin;
-import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.sql.*;
@@ -12,17 +11,20 @@ public class Database {
 
     private Connection connection;
 
-    private static final Logger LOGGER = Bukkit.getLogger();
-    private static final String DATABASE_URL = getDatabaseUrl();
+    private final File dataFolder;
+    private final Logger logger;
 
-    private static String getDatabaseUrl() {
-        File folder = KitsPlugin.getINSTANCE().getDataFolder();
+    public Database(KitsPlugin plugin) {
+        this.dataFolder = plugin.getDataFolder();
+        this.logger = plugin.getLogger();
+    }
 
-        if (!folder.exists() && !folder.mkdirs()) {
-            LOGGER.log(Level.SEVERE, "Failed to create plugin data folder: " + folder.getAbsolutePath());
+    private String getDatabaseUrl() {
+        if (!dataFolder.exists() && !dataFolder.mkdirs()) {
+            logger.log(Level.SEVERE, "Failed to create plugin data folder: " + dataFolder.getAbsolutePath());
         }
 
-        File databaseFile = new File(folder, "kits.db");
+        File databaseFile = new File(dataFolder, "kits.db");
         return "jdbc:sqlite:" + databaseFile.getAbsolutePath();
     }
 
@@ -32,12 +34,12 @@ public class Database {
                 if (connection == null || connection.isClosed()) {
                     Class.forName("org.sqlite.JDBC");
 
-                    connection = DriverManager.getConnection(DATABASE_URL);
+                    connection = DriverManager.getConnection(getDatabaseUrl());
 
                     createTables();
                 }
             } catch (ClassNotFoundException | SQLException exception) {
-                LOGGER.log(Level.SEVERE, "Failed to open database connection.", exception);
+                logger.log(Level.SEVERE, "Failed to open database connection.", exception);
             }
         }
     }
@@ -49,7 +51,7 @@ public class Database {
             }
 
         } catch (SQLException exception) {
-            LOGGER.log(Level.SEVERE, "Error checking database connection.", exception);
+            logger.log(Level.SEVERE, "Error checking database connection.", exception);
         }
 
         return connection;
@@ -64,14 +66,14 @@ public class Database {
                 }
 
             } catch (SQLException exception) {
-                LOGGER.log(Level.SEVERE, "Failed to close database connection.", exception);
+                logger.log(Level.SEVERE, "Failed to close database connection.", exception);
             }
         }
     }
 
     private void createTables() {
         if (connection == null) {
-            LOGGER.log(Level.SEVERE, "Cannot create tables: No database connection.");
+            logger.log(Level.SEVERE, "Cannot create tables: No database connection.");
             return;
         }
 
@@ -79,7 +81,7 @@ public class Database {
             statement.execute("CREATE TABLE IF NOT EXISTS kits (kit TEXT PRIMARY KEY, permission TEXT, cooldown INTEGER, content TEXT)");
             statement.execute("CREATE TABLE IF NOT EXISTS cooldowns (player TEXT, kit TEXT, expire_time INTEGER, PRIMARY KEY(player, kit))");
         } catch (SQLException exception) {
-            LOGGER.log(Level.SEVERE, "Failed to create database tables.", exception);
+            logger.log(Level.SEVERE, "Failed to create database tables.", exception);
         }
     }
 }
