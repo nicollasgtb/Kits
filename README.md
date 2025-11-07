@@ -1,5 +1,3 @@
-<img width="1153" height="115" alt="image" src="https://github.com/user-attachments/assets/061673f7-c2d8-4564-bb3a-9dcf03eaee5c" /># Minecraft Kits Plugin
-
 ## 📄 About
 A lightweight Minecraft Kits plugin that allows players to easily access predefined kits.
 
