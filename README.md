@@ -27,8 +27,8 @@ A lightweight Minecraft Kits plugin that allows players to easily access predefi
 
 ## 🛠️ Technologies Used
 - **SQLite** (using [Xerial SQLite JDBC](https://github.com/xerial/sqlite-jdbc)) for storing kit data;
-- **MariaDB** an alternative remote database for storing kit data;
-- **HikariCP** for high-performance database connection pooling;
+- **MariaDB** (using [MariaDB Connector/J](https://github.com/MariaDB/mariadb-connector-j)) as an alternative remote database for storing kit data;
+- **[HikariCP](https://github.com/brettwooldridge/HikariCP)** for high-performance database connection pooling;
 
 ## 💡 Future Plans
 - GUI for selecting kits;
