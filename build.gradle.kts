@@ -33,11 +33,12 @@ tasks.shadowJar {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
 tasks.withType<JavaCompile>().configureEach {
+    options.release = 11
     options.encoding = "UTF-8"
 }
 
