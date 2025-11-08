@@ -4,3 +4,4 @@
 /.idea/
 /.vscode/
 /bin/
+gradle.properties
