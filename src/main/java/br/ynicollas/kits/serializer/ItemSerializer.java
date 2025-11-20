@@ -24,7 +24,8 @@ public final class ItemSerializer {
         }
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-             BukkitObjectOutputStream bukkitObjectOutputStream = new BukkitObjectOutputStream(byteArrayOutputStream)) {
+                BukkitObjectOutputStream bukkitObjectOutputStream = new BukkitObjectOutputStream(
+                        byteArrayOutputStream)) {
 
             bukkitObjectOutputStream.writeInt(items.length);
 
@@ -47,7 +48,7 @@ public final class ItemSerializer {
         }
 
         try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(Base64.getDecoder().decode(data));
-             BukkitObjectInputStream bukkitObjectInputStream = new BukkitObjectInputStream(byteArrayInputStream)) {
+                BukkitObjectInputStream bukkitObjectInputStream = new BukkitObjectInputStream(byteArrayInputStream)) {
 
             int size = bukkitObjectInputStream.readInt();
             ItemStack[] items = new ItemStack[size];

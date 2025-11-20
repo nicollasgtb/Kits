@@ -1,8 +1,9 @@
 package br.ynicollas.kits.commands;
 
+import br.ynicollas.kits.gui.KitEditorHolder;
 import br.ynicollas.kits.models.Kit;
-import br.ynicollas.kits.listeners.InventoryCloseListener;
 import br.ynicollas.kits.storage.kits.KitsStorage;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -46,7 +47,9 @@ public class EditKitCommand implements CommandExecutor {
             return false;
         }
 
-        Inventory kitInventory = player.getServer().createInventory(null, 54, ChatColor.DARK_GRAY + "Kit");
+        KitEditorHolder holder = new KitEditorHolder(kit);
+
+        Inventory kitInventory = Bukkit.createInventory(holder, 54, ChatColor.DARK_GRAY + "Kit");
 
         if (kit.getItems() != null) {
             kitInventory.setContents(kit.getItems());
@@ -54,9 +57,7 @@ public class EditKitCommand implements CommandExecutor {
 
         player.openInventory(kitInventory);
 
-        InventoryCloseListener.setCurrentKit(player, kit);
-
-        player.sendMessage(ChatColor.YELLOW + "Você editou o kit com sucesso!");
+        player.sendMessage(ChatColor.YELLOW + "Editando o kit " + id + ". Feche o inventário para salvar.");
 
         return true;
     }

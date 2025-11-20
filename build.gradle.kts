@@ -3,12 +3,18 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 plugins {
     java
-
+    
     id("com.gradleup.shadow") version "9.1.0"
 }
 
 group = "br.ynicollas"
-version = "1.0.8"
+version = "1.0.9"
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
 
 repositories {
     mavenCentral()
@@ -23,25 +29,24 @@ dependencies {
     implementation("org.mariadb.jdbc:mariadb-java-client:3.5.6")
 }
 
-tasks.shadowJar {
-    archiveBaseName.set("Kits")
-    archiveClassifier.set("")
-
-    relocate("com.zaxxer.hikari", "br.ynicollas.libs.hikari")
-    relocate("org.mariadb.jdbc", "br.ynicollas.libs.mariadb")
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+tasks {
+    withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
+        options.release.set(11)
     }
-}
 
-tasks.withType<JavaCompile>().configureEach {
-    options.release = 11
-    options.encoding = "UTF-8"
-}
+    processResources {
+        expand(project.properties)
+    }
+    shadowJar {
+        archiveBaseName.set("Kits")
+        archiveClassifier.set("")
 
-tasks.processResources {
-    expand(project.properties)
+        relocate("com.zaxxer.hikari", "br.ynicollas.libs.hikari")
+        relocate("org.mariadb.jdbc", "br.ynicollas.libs.mariadb")
+    }
+
+    build {
+        dependsOn(shadowJar)
+    }
 }

@@ -3,6 +3,7 @@ package br.ynicollas.kits.models;
 import org.bukkit.inventory.ItemStack;
 
 public class Kit {
+
     private final String id;
     private final String permission;
     private final KitCooldown cooldown;

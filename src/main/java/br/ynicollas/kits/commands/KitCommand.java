@@ -52,7 +52,8 @@ public class KitCommand implements CommandExecutor {
 
         if (cooldowns.hasCooldown(player, id) && !player.hasPermission("kit.bypass")) {
             long timeRemaining = cooldowns.getCooldown(player, id) - System.currentTimeMillis();
-            player.sendMessage(ChatColor.RED + "Você precisa esperar " + TimeUtils.format(timeRemaining) + " para pegar este kit novamente.");
+            player.sendMessage(ChatColor.RED + "Você precisa esperar " + TimeUtils.format(timeRemaining)
+                    + " para pegar este kit novamente.");
             return false;
         }
 

@@ -1,6 +1,7 @@
 package br.ynicollas.kits.models;
 
 public class KitCooldown {
+    
     private final int days;
     private final int hours;
     private final int minutes;

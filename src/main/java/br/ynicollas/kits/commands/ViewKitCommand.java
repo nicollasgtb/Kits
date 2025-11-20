@@ -1,7 +1,9 @@
 package br.ynicollas.kits.commands;
 
+import br.ynicollas.kits.gui.KitPreviewHolder;
 import br.ynicollas.kits.models.Kit;
 import br.ynicollas.kits.storage.kits.KitsStorage;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -27,7 +29,7 @@ public class ViewKitCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "Uso correto: /editarkit <id>");
+            player.sendMessage(ChatColor.RED + "Uso correto: /verkit <id>");
             return false;
         }
 
@@ -40,7 +42,10 @@ public class ViewKitCommand implements CommandExecutor {
             return false;
         }
 
-        Inventory kitInventory = player.getServer().createInventory(null, 54, ChatColor.DARK_GRAY + "Visualizando");
+        KitPreviewHolder holder = new KitPreviewHolder();
+
+        Inventory kitInventory = Bukkit.createInventory(holder, 54,
+                ChatColor.DARK_GRAY + "Visualizando Kit: " + kit.getId());
 
         if (kit.getItems() != null) {
             kitInventory.setContents(kit.getItems());

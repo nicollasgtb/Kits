@@ -1,9 +1,10 @@
 package br.ynicollas.kits.commands;
 
+import br.ynicollas.kits.gui.KitEditorHolder;
 import br.ynicollas.kits.models.Kit;
 import br.ynicollas.kits.models.KitCooldown;
-import br.ynicollas.kits.listeners.InventoryCloseListener;
 import br.ynicollas.kits.storage.kits.KitsStorage;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -58,17 +59,15 @@ public class CreateKitCommand implements CommandExecutor {
             return false;
         }
 
-        Inventory kitInventory = player.getServer().createInventory(null, 54, ChatColor.DARK_GRAY + "Kit");
-
-        player.openInventory(kitInventory);
-
         KitCooldown kitCooldown = new KitCooldown(0, 0, cooldown);
-
         Kit kit = new Kit(id, permission, kitCooldown, null);
 
-        InventoryCloseListener.setCurrentKit(player, kit);
+        KitEditorHolder holder = new KitEditorHolder(kit);
 
-        player.sendMessage(ChatColor.YELLOW + "Kit criado com sucesso!");
+        Inventory kitInventory = Bukkit.createInventory(holder, 54, ChatColor.DARK_GRAY + "Kit");
+        player.openInventory(kitInventory);
+
+        player.sendMessage(ChatColor.YELLOW + "Kit criado! Coloque os itens no inventário e feche para salvar.");
 
         return true;
     }
