@@ -37,7 +37,7 @@ public class CooldownsStorage {
         }
 
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, player.getName());
             statement.setString(2, kit);
@@ -57,7 +57,7 @@ public class CooldownsStorage {
         String query = "SELECT expire_time FROM cooldowns WHERE player = ? AND kit = ?";
 
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, player.getName());
             statement.setString(2, id);
@@ -88,7 +88,7 @@ public class CooldownsStorage {
         String query = "DELETE FROM cooldowns WHERE player = ? AND kit = ?";
 
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, player.getName());
             statement.setString(2, kit);
@@ -108,7 +108,7 @@ public class CooldownsStorage {
         String query = "DELETE FROM cooldowns WHERE kit = ?";
 
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, kit);
             int affectedRows = statement.executeUpdate();

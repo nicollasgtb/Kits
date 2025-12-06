@@ -30,14 +30,16 @@ dependencies {
 }
 
 tasks {
-    withType<JavaCompile>().configureEach {
-        options.encoding = "UTF-8"
-        options.release.set(11)
+    build {
+        dependsOn(shadowJar)
     }
 
     processResources {
-        expand(project.properties)
+        filesMatching("plugin.yml") {
+            expand("version" to version)
+        }
     }
+
     shadowJar {
         archiveBaseName.set("Kits")
         archiveClassifier.set("")
@@ -46,7 +48,8 @@ tasks {
         relocate("org.mariadb.jdbc", "br.ynicollas.libs.mariadb")
     }
 
-    build {
-        dependsOn(shadowJar)
+    withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
+        options.release.set(11)
     }
 }

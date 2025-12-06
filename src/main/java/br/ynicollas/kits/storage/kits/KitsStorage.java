@@ -30,7 +30,7 @@ public class KitsStorage {
 
     public void saveKit(Kit kit) {
         String query;
-        
+
         if (database.getStorageType().equals("mariadb")) {
             query = "REPLACE INTO kits (kit, permission, cooldown, content) VALUES (?, ?, ?, ?)";
         } else {
@@ -38,7 +38,7 @@ public class KitsStorage {
         }
 
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, kit.getId());
             statement.setString(2, kit.getPermission());
@@ -64,7 +64,7 @@ public class KitsStorage {
         String query = "SELECT * FROM kits WHERE kit = ?";
 
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, id);
 
@@ -95,7 +95,7 @@ public class KitsStorage {
         String query = "DELETE FROM kits WHERE kit = ?";
 
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, id);
 

@@ -33,7 +33,7 @@ public class InventoryCloseListener implements Listener {
         Kit kit = holder.getKit();
 
         List<ItemStack> filteredItems = new ArrayList<>();
-        
+
         for (ItemStack item : inventory.getContents()) {
             if (item != null && item.getType() != Material.AIR) {
                 filteredItems.add(item);

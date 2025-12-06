@@ -1,5 +1,5 @@
 name: Kits
-version: ${project.version}
+version: ${version}
 main: br.ynicollas.kits.KitsPlugin
 author: yNicollas
 website: https://github.com/nicollasgtb

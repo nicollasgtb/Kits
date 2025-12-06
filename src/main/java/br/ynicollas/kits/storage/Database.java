@@ -41,8 +41,7 @@ public class Database {
                 hikariConfig.setJdbcUrl("jdbc:mariadb://" +
                         config.getString("storage.mariadb.host", "127.0.0.1") + ":" +
                         config.getInt("storage.mariadb.port", 3306) + "/" +
-                        config.getString("storage.mariadb.database", "kits")
-                );
+                        config.getString("storage.mariadb.database", "kits"));
 
                 hikariConfig.setUsername(config.getString("storage.mariadb.username", "root"));
                 hikariConfig.setPassword(config.getString("storage.mariadb.password", "password"));
