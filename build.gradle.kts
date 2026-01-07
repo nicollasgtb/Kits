@@ -44,10 +44,12 @@ tasks {
         archiveBaseName.set("Kits")
         archiveClassifier.set("")
 
-        relocate("com.zaxxer.hikari", "br.ynicollas.kits.libs.hikari")
-        relocate("org.mariadb.jdbc", "br.ynicollas.kits.libs.mariadb")
+        val libsPackage = "${project.group}.libs"
+
+        relocate("com.zaxxer.hikari", "$libsPackage.hikari")
+        relocate("org.mariadb.jdbc", "$libsPackage.mariadb")
         
-        relocate("org.slf4j", "br.ynicollas.kits.libs.slf4j")
+        relocate("org.slf4j", "$libsPackage.slf4j")
     }
 
     withType<JavaCompile>().configureEach {
