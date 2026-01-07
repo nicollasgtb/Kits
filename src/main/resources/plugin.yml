@@ -1,10 +1,10 @@
 name: Kits
 version: ${version}
-main: br.ynicollas.kits.KitsPlugin
-author: yNicollas
-website: https://github.com/nicollasgtb
+main: com.codenicollas.kits.KitsPlugin
+author: codenicollas
+website: https://github.com/codenicollas
 api-version: '1.13'
-load: STARTUP
+load: POSTWORLD
 commands:
   createkit:
     aliases: [criarkit]

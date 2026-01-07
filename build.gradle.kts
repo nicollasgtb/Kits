@@ -4,8 +4,8 @@ plugins {
     id("com.gradleup.shadow") version "9.3.0"
 }
 
-group = "br.ynicollas.kits"
-version = "1.1.1"
+group = "com.codenicollas.kits"
+version = "1.1.2"
 
 java {
     toolchain {
@@ -18,7 +18,7 @@ repositories {
     
     maven {
         name = "spigot"
-        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+        url = uri("https://hub.spigotmc.org/nexus/content/groups/public/")
     }   
 }
 
@@ -26,7 +26,7 @@ dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT")
 
     implementation("com.zaxxer:HikariCP:7.0.2")
-    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.6")
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.7")
 }
 
 tasks {

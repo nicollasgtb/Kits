@@ -7,3 +7,9 @@ storage:
     database: "kits"
     username: "root"
     password: "password"
+
+pool-settings:
+  maximum-pool-size: 3
+  minimum-idle: 1
+  maximum-lifetime: 1800000
+  connection-timeout: 10000
